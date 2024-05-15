@@ -1,0 +1,71 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  margin: 56px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: clamp(1em, 1em + 2vw, 3em);
+  text-align: center;
+  color: #75b79e;
+
+  background-color: #eef9bf;
+}
+
+header {
+  position: sticky;
+}
+
+main {
+  max-width: 1024px;
+  margin: 32px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  height: 148px;
+  margin: 16px;
+
+  display: flex;
+  flex: 0 0 116px;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #a7e9af;
+  border-radius: 8px;
+
+  transition: scale 300ms ease;
+}
+
+.card:hover {
+  cursor: pointer;
+  scale: 1.1;
+  filter: drop-shadow(0 0 12px #a8a8a8);
+}
+
+@media (max-width: 768px) {
+  body {
+    margin: 16px;
+  }
+
+  header {
+    margin: 0;
+  }
+}
