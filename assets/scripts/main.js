@@ -1,37 +1,64 @@
-let startGame = false;
-let amountCards = undefined;
+// Constants
+const MIN_CARDS = 4;
+const MAX_CARDS = 14;
 
-function getAmountCards() {
-  const input = prompt(
-    "🔢 Com quantas cartas deseja jogar?\n🟢 Deve ser um número PAR entre 4 e 14."
-  );
-
-  amountCards = parseInt(input, 10);
-
-  if (isNaN(amountCards)) {
-    alert("🟡 Por favor, insira um número válido.");
-  } else {
-    startGame = isValidValue(amountCards);
-    if (!startGame) {
-      alert("🔴 Número inválido. Deve ser um número PAR entre 4 e 14.");
-    }
-  }
-}
-
+// Utility Functions
 function isEven(value) {
   return value % 2 === 0;
 }
 
 function inRange(value) {
-  return value >= 4 && value <= 14;
+  return value >= MIN_CARDS && value <= MAX_CARDS;
 }
 
-function isValidValue(value) {
+function isValidCardAmount(value) {
   return isEven(value) && inRange(value);
 }
 
-while (!startGame) {
-  getAmountCards();
+// Input and Validation Functions
+function getCardAmountInput() {
+  const input = prompt(
+    `🔢 Com quantas cartas deseja jogar?\n🟢 Deve ser um número PAR entre ${MIN_CARDS} e ${MAX_CARDS}.`
+  );
+  return parseInt(input, 10);
 }
 
-console.log(`O jogo começou com ${amountCards} cartas.`);
+function validateCardAmount(amount) {
+  if (isNaN(amount)) {
+    alert("🟡 Por favor, insira um NÚMERO válido.");
+    return false;
+  }
+  if (!isValidCardAmount(amount)) {
+    alert(`🔴 Número inválido. Deve ser um NÚMERO PAR entre ${MIN_CARDS} e ${MAX_CARDS}.`);
+    return false;
+  }
+  return true;
+}
+
+function promptForCardAmount() {
+  const amount = getCardAmountInput();
+  return validateCardAmount(amount) ? amount : null;
+}
+
+// Game Functions
+function distributeCards(amount) {
+  console.log(`Distribuindo ${amount} cartas`);
+}
+
+function startGame() {
+  let amountCards;
+  let gameStarted = false;
+
+  while (!gameStarted) {
+    amountCards = promptForCardAmount();
+    if (amountCards !== null) {
+      gameStarted = true;
+      distributeCards(amountCards);
+    }
+  }
+
+  console.log(`O jogo começou com ${amountCards} cartas.`);
+}
+
+// Start the Game
+startGame();
