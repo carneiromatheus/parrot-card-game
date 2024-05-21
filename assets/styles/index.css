@@ -46,13 +46,10 @@ main {
   height: 200px;
   margin: 16px;
 
-  display: flex;
-  flex: 0 0 20%;
-  align-items: center;
-  justify-content: center;
+  position: relative;
 
-  background-color: #a7e9af;
-  border-radius: 8px;
+  display: flex;
+  flex: 0 0 132px;
 
   transition: scale 300ms ease;
 }
@@ -62,6 +59,30 @@ main {
   scale: 1.1;
   filter: drop-shadow(0 0 12px #a8a8a8);
 }
+
+.face {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  backface-visibility: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #a7e9af;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+  transition: all 500ms;
+  transform-style: preserve-3d;
+}
+
+.back-face {
+  transform: rotateY(180deg);
+}
+
 
 @media (max-width: 768px) {
   body {
