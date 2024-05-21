@@ -13,13 +13,14 @@
 }
 
 body {
+  height: calc(100dvh - (2 * 56px));
   margin: 56px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  font-size: clamp(1em, 1em + 2vw, 3em);
+  font-size: clamp(1em, 1em + 1vw, 3em);
   text-align: center;
   color: #75b79e;
 
@@ -31,20 +32,22 @@ header {
 }
 
 main {
-  max-width: 1024px;
+  width: 100%;
+  max-width: 768px;
   margin: 32px;
 
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
 }
 
 .card {
-  height: 148px;
+  height: 200px;
   margin: 16px;
 
   display: flex;
-  flex: 0 0 116px;
+  flex: 0 0 20%;
   align-items: center;
   justify-content: center;
 
