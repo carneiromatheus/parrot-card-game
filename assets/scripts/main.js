@@ -87,8 +87,14 @@ function validateCardAmount(amount) {
 }
 
 function promptForCardAmount() {
-  const amount = getCardAmountInput();
-  return validateCardAmount(amount) ? amount : null;
+  let amount = null;
+  while (amount === null) {
+    const inputAmount = getCardAmountInput();
+    if (validateCardAmount(inputAmount)) {
+      amount = inputAmount;
+    }
+  }
+  return amount;
 }
 
 // Game Functions
@@ -98,30 +104,21 @@ function shuffleCards(cards) {
 
 function assembleDeck(amount) {
   const ceil = amount / 2;
-  const cards = LIST_CARDS.splice(0, ceil);
-  const deck = [...cards, ...cards];
+  const selectedCards = LIST_CARDS.slice(0, ceil);
+  const deck = [...selectedCards, ...selectedCards];
   return shuffleCards(deck);
 }
 
 function distributeCards(deck) {
   const gameBoard = document.getElementById("board");
-  deck.map((item) => gameBoard.appendChild(generateCard(item)));
+  gameBoard.innerHTML = "";
+  deck.forEach((item) => gameBoard.appendChild(generateCard(item)));
 }
 
 function startGame() {
-  let amountCards;
-  let gameStarted = false;
-
-  shuffleCards(LIST_CARDS);
-
-  while (!gameStarted) {
-    amountCards = promptForCardAmount();
-    if (amountCards !== null) {
-      const deck = assembleDeck(amountCards);
-      distributeCards(deck);
-      gameStarted = true;
-    }
-  }
+  const amountCards = promptForCardAmount();
+  const deck = assembleDeck(amountCards);
+  distributeCards(deck);
 }
 
 // Start the Game

@@ -83,7 +83,6 @@ main {
   transform: rotateY(180deg);
 }
 
-
 @media (max-width: 768px) {
   body {
     margin: 16px;
