@@ -29,7 +29,9 @@ function validateCardAmount(amount) {
     return false;
   }
   if (!isValidCardAmount(amount)) {
-    alert(`🔴 Número inválido. Deve ser um NÚMERO PAR entre ${MIN_CARDS} e ${MAX_CARDS}.`);
+    alert(
+      `🔴 Número inválido. Deve ser um NÚMERO PAR entre ${MIN_CARDS} e ${MAX_CARDS}.`
+    );
     return false;
   }
   return true;
