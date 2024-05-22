@@ -102,6 +102,28 @@ function promptForCardAmount() {
   return amount;
 }
 
+function getRestartInput() {
+  const input = prompt("🔄 Gostaria de reiniciar a partida? (sim/não)").toLowerCase();
+  return input;
+}
+
+function validateRestartInput(input) {
+  return input === "sim" || input === "não";
+}
+
+function promptRestart() {
+  let restart = null;
+  while (restart === null) {
+    const input = getRestartInput();
+    if (validateRestartInput(input)) {
+      restart = input;
+    } else {
+      alert("🔴 Entrada inválida. Por favor, responda 'sim' ou 'não'.");
+    }
+  }
+  return restart;
+}
+
 // Game Functions
 function shuffleCards(cards) {
   return cards.sort(getComparator);
@@ -152,15 +174,23 @@ function checkGameOver() {
 
   if (allFlippedCards.length === allCards.length) {
     clearInterval(timer);
-    setTimeout(
-      () =>
-        alert(
-          `🎉 Você ganhou em ${flipCount} jogadas!
-          \n⏰ A duração do jogo foi de ${timerCount} segundos!`
-        ),
-      500
-    );
+    setTimeout(() => {
+      alert(
+        `🎉 Você ganhou em ${flipCount} jogadas!\n⏰ A duração do jogo foi de ${timerCount} segundos!`
+      );
+      const restart = promptRestart();
+      if (restart === "sim") {
+        resetGame();
+      }
+    }, 500);
   }
+}
+
+function resetGame() {
+  timerCount = 0;
+  flipCount = 0;
+  flippedCardsTemp.length = 0;
+  startGame();
 }
 
 function startTimer() {
