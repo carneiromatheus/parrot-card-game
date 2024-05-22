@@ -10,6 +10,8 @@ const LIST_CARDS = [
   "triplets",
   "unicorn",
 ];
+let timer;
+let timerCount = 0;
 const flippedCardsTemp = [];
 let flipCount = 0;
 
@@ -134,7 +136,6 @@ function checkForMatch() {
 }
 
 function flipCard(card) {
-  
   if (flippedCardsTemp.length < 2 && !card.classList.contains("flipped")) {
     card.classList.add("flipped");
     flippedCardsTemp.push(card);
@@ -150,14 +151,32 @@ function checkGameOver() {
   const allFlippedCards = document.querySelectorAll(".flipped");
 
   if (allFlippedCards.length === allCards.length) {
-    setTimeout(() => alert(`🎉 Você ganhou em ${flipCount} jogadas!`), 500);
+    clearInterval(timer);
+    setTimeout(
+      () =>
+        alert(
+          `🎉 Você ganhou em ${flipCount} jogadas!
+          \n⏰ A duração do jogo foi de ${timerCount} segundos!`
+        ),
+      500
+    );
   }
+}
+
+function startTimer() {
+  const timerElement = document.getElementById("timer");
+
+  timer = setInterval(() => {
+    timerCount++;
+    timerElement.textContent = timerCount;
+  }, 1000);
 }
 
 function startGame() {
   const amountCards = promptForCardAmount();
   const deck = assembleDeck(amountCards);
   distributeCards(deck);
+  startTimer();
 }
 
 // Start the Game

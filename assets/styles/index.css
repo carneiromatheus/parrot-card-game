@@ -31,6 +31,15 @@ header {
   position: sticky;
 }
 
+#timer {
+  position: fixed;
+  top: 16px;
+  right: 24px;
+
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #28282840;
+}
+
 main {
   width: 100%;
   max-width: 768px;
