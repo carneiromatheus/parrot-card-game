@@ -11,6 +11,7 @@ const LIST_CARDS = [
   "unicorn",
 ];
 const flippedCardsTemp = [];
+let flipCount = 0;
 
 // Utility Functions
 function isEven(value) {
@@ -133,11 +134,23 @@ function checkForMatch() {
 }
 
 function flipCard(card) {
+  
   if (flippedCardsTemp.length < 2 && !card.classList.contains("flipped")) {
     card.classList.add("flipped");
     flippedCardsTemp.push(card);
+    flipCount++;
 
     if (flippedCardsTemp.length === 2) checkForMatch();
+    checkGameOver();
+  }
+}
+
+function checkGameOver() {
+  const allCards = document.querySelectorAll(".card");
+  const allFlippedCards = document.querySelectorAll(".flipped");
+
+  if (allFlippedCards.length === allCards.length) {
+    setTimeout(() => alert(`🎉 Você ganhou em ${flipCount} jogadas!`), 500);
   }
 }
 
