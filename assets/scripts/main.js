@@ -10,6 +10,7 @@ const LIST_CARDS = [
   "triplets",
   "unicorn",
 ];
+const flippedCardsTemp = [];
 
 // Utility Functions
 function isEven(value) {
@@ -60,6 +61,7 @@ function generateCard(gifName) {
 
   card.appendChild(frontFace);
   card.appendChild(backFace);
+  card.addEventListener("click", () => flipCard(card));
 
   return card;
 }
@@ -113,6 +115,30 @@ function distributeCards(deck) {
   const gameBoard = document.getElementById("board");
   gameBoard.innerHTML = "";
   deck.forEach((item) => gameBoard.appendChild(generateCard(item)));
+}
+
+function unflipCard() {
+  flippedCardsTemp.forEach((card) => card.classList.remove("flipped"));
+  flippedCardsTemp.length = 0;
+}
+
+function checkForMatch() {
+  const [card1, card2] = flippedCardsTemp;
+
+  if (card1.innerHTML === card2.innerHTML) {
+    flippedCardsTemp.length = 0;
+  } else {
+    setTimeout(unflipCard, 1000);
+  }
+}
+
+function flipCard(card) {
+  if (flippedCardsTemp.length < 2 && !card.classList.contains("flipped")) {
+    card.classList.add("flipped");
+    flippedCardsTemp.push(card);
+
+    if (flippedCardsTemp.length === 2) checkForMatch();
+  }
 }
 
 function startGame() {

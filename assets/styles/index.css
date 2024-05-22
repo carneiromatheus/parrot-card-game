@@ -83,6 +83,18 @@ main {
   transform: rotateY(180deg);
 }
 
+.card.flipped .back-face {
+  transform: rotateY(0deg);
+}
+
+.card.flipped .front-face {
+  transform: rotateY(-180deg);
+}
+
+.card.flipped:hover {
+  cursor: default;
+}
+
 @media (max-width: 768px) {
   body {
     margin: 16px;
